@@ -32,6 +32,13 @@ Open Powershell as Administrator and run:
 
 Please file pull requests instead of just asking for things. Thanks!
 
+## Fixes over the original code
+The following fixes were made to the original code:
+- Script elevation.
+- Use `Push-Location` and `Pop-Location` to get back to the same location you started at.
+- Support for account names with spaces like `Kees Bakker`.
+- Script lines are made yellow.
+- PowerShell linted.
 ## License
 
 MIT

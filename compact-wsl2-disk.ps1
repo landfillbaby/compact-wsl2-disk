@@ -12,9 +12,9 @@ If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 	exit
 }
 
+$files = @()
 
 # File is normally under something like C:\Users\onoma\AppData\Local\Packages\CanonicalGroupLimited...
-$files = @()
 Push-Location $env:LOCALAPPDATA\Packages
 Get-ChildItem -Recurse -Filter "ext4.vhdx" -ErrorAction SilentlyContinue | foreach-object {
   $files += ${PSItem}
