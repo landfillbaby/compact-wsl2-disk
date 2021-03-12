@@ -1,32 +1,28 @@
 $ErrorActionPreference = "Stop"
 
+Write-Host ""
+Write-Host "COMPACT-WSL2-DISK" -ForegroundColor Yellow
+Write-Host ""
+
 If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
 {
-	Write-Host ""
-	Write-Host "COMPACT-SQL2-DISK" -ForegroundColor Yellow
-	Write-Host ""
-	Write-Host "opening elevated shell... " -ForegroundColor Yellow
+	Write-Host "Opening elevated shell... " -ForegroundColor Yellow
 	Write-Host ""
 	Start-Process powershell.exe "-File",('"{0}"' -f $MyInvocation.MyCommand.Path) -Verb RunAs
 	exit
-}
-else {
-	Write-Host ""
-	Write-Host "COMPACT-SQL2-DISK" -ForegroundColor Yellow
-	Write-Host ""
 }
 
 
 # File is normally under something like C:\Users\onoma\AppData\Local\Packages\CanonicalGroupLimited...
 $files = @()
-pushd $env:LOCALAPPDATA\Packages
-get-childitem -recurse -filter "ext4.vhdx" -ErrorAction SilentlyContinue | foreach-object {
+Push-Location $env:LOCALAPPDATA\Packages
+Get-ChildItem -Recurse -Filter "ext4.vhdx" -ErrorAction SilentlyContinue | foreach-object {
   $files += ${PSItem}
 }
 
 # Docker wsl2 vhdx files
-pushd $env:LOCALAPPDATA\Docker
-get-childitem -recurse -filter "ext4.vhdx" -ErrorAction SilentlyContinue | foreach-object {
+Push-Location $env:LOCALAPPDATA\Docker
+Get-ChildItem -Recurse -Filter "ext4.vhdx" -ErrorAction SilentlyContinue | foreach-object {
   $files += ${PSItem}
 }
 
@@ -57,8 +53,8 @@ exit
 
 }
 
-popd
-popd
+Pop-Location
+Pop-Location
 
 Write-Host ""
 Write-Host "Finished." -ForegroundColor Yellow
