@@ -2,8 +2,12 @@
 
 ## A small script for Windows 10 Home users to compact their WSL2 disks
 
-Inspired by [this post on GitHub about WSL2 filling hard disks](https://github.com/microsoft/WSL/issues/4699#issuecomment-627133168). This script will:
+Inspired by [this post on GitHub about WSL2 filling hard disks](https://github.com/microsoft/WSL/issues/4699#issuecomment-627133168). 
+Original code by [mikemaccana / compact-wsl2-disk](https://github.com/mikemaccana/compact-wsl2-disk).
 
+This script will:
+
+ - Check for an elevated shell.
  - Find your `vhdx` file(s) in the default paths of 
      * WSL2 distros (`C:\Users\<NAME>\AppData\Local\Packages\CanonicalGroupLimited...`)
      * Docker WSL2 distros (`C:\Users\<NAME>\AppData\Local\Docker`)
