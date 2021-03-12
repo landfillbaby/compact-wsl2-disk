@@ -58,6 +58,5 @@ Pop-Location
 
 Write-Host ""
 Write-Host "Finished." -ForegroundColor Yellow
-Write-Host ""
 
 timeout /t 5
