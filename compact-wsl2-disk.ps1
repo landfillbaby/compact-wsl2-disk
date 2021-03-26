@@ -63,4 +63,4 @@ Pop-Location
 Write-Host ""
 Write-Host "Compacting of $($files.count) file(s) complete." -ForegroundColor Yellow
 
-timeout /t 5
+pause
