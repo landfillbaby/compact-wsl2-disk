@@ -40,8 +40,9 @@ wsl --shutdown
 foreach ($file in $files) {
 
 	$disk = $file.FullName
-	Write-Host ""
-	Write-Host "Compacting '$disk'..."  -ForegroundColor Yellow
+	Write-Host "Disk to compact: $disk" -ForegroundColor Yellow
+	Write-Host "Length: $($file.Length/1MB) MB" -ForegroundColor Yellow
+	Write-Host "Compacting disk (starting diskpart)..." -ForegroundColor Yellow
 
 	@"
 select vdisk file="$disk"
@@ -51,12 +52,15 @@ detach vdisk
 exit
 "@ | diskpart
 
+	Write-Host "Success. Compacted $disk." -ForegroundColor Yellow
+	Write-Host "New length: $((Get-Item $disk).Length/1MB) MB" -ForegroundColor Yellow
+
 }
 
 Pop-Location
 Pop-Location
 
 Write-Host ""
-Write-Host "Finished." -ForegroundColor Yellow
+Write-Host "Compacting of $($files.count) file(s) complete." -ForegroundColor Yellow
 
 timeout /t 5
