@@ -34,7 +34,7 @@ Write-Host "Found $($files.count) VHDX file(s)" -ForegroundColor Yellow
 Write-Host "Shutting down WSL2..." -ForegroundColor Yellow
 
 # See https://github.com/microsoft/WSL/issues/4699#issuecomment-722547552
-wsl -e sudo fstrim /
+wsl -e sudo fstrim -av
 wsl --shutdown
 
 foreach ($file in $files) {
